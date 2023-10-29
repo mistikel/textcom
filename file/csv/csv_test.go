@@ -7,7 +7,10 @@ import (
 )
 
 func TestWrite(t *testing.T) {
-	csv := csv.New()
+	opt := csv.Option{
+		Path: "/Users/agusmistiawan/Documents/",
+	}
+	csv := csv.New(opt)
 	csv.Add("Test")
 	csv.Add("Mock")
 

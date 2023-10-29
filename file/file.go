@@ -2,6 +2,7 @@ package file
 
 import (
 	"errors"
+	"os"
 	"textcom/file/csv"
 )
 
@@ -15,10 +16,14 @@ type IFile interface {
 }
 
 func New(_type int) (IFile, error) {
+
 	var f IFile
 	switch _type {
 	case CSV:
-		f = csv.New()
+		opt := csv.Option{
+			Path: os.Getenv("CSV_PATH"),
+		}
+		f = csv.New(opt)
 	default:
 		return nil, errors.New("undefined type")
 	}

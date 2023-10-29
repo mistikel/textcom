@@ -3,7 +3,8 @@
     go test ./...
 ```
 
-* Run Main *
+* Run Main 
 ```
+    EXPORT CSV_PATH=/path/you/want
     go run main.go
 ```

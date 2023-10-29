@@ -8,16 +8,19 @@ import (
 	"github.com/google/uuid"
 )
 
-const (
-	prefixPath = "/Users/agusmistiawan/Documents/%s.csv"
-)
-
 type csv struct {
 	text []string
+	opt  Option
 }
 
-func New() *csv {
-	return &csv{}
+type Option struct {
+	Path string
+}
+
+func New(opt Option) *csv {
+	return &csv{
+		opt: opt,
+	}
 }
 
 func (c *csv) Add(text string) {
@@ -26,7 +29,7 @@ func (c *csv) Add(text string) {
 }
 
 func (c *csv) Write() (path string, err error) {
-	path = fmt.Sprintf(prefixPath, uuid.New().String())
+	path = fmt.Sprint(c.opt.Path, uuid.New().String(), ".csv")
 	fmt.Print(path)
 	file, err := os.Create(path)
 	if err != nil {
